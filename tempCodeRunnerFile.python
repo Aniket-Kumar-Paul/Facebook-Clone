@@ -1,0 +1,33 @@
+def elements(Q, query): # Q=3, QUERY=[[1,62],[1,49],[2,4]]
+    myList, poppedElements = [], []
+    dic = dict() # {no. : [count, last_index]
+    maxCount, maxKeyIndex = 0, 0
+
+    for i in range(Q):
+        singleQuery = query[i]
+        num = singleQuery[1]
+        
+        if (singleQuery[0] == 1):
+            myList.append(num)
+            
+            if (num not in dic):
+                dic[num] = [1,i]
+            else:
+                dic[num] = [dic[num][0]+1, i]  
+            
+            if (dic[num][0] == maxCount):
+                maxKeyIndex = i
+            elif (dic[num][0] > maxCount):
+                maxCount = dic[num][0]
+                maxKeyIndex = i
+        
+        else:
+            poppedElements.append(myList.pop(maxKeyIndex))
+    
+    return poppedElements
+
+Q = int(input())
+query = [list(map(int, input().split())) for i in range(Q)]
+
+out_ = elements(Q, query)
+print(' '.join(map(str, out_)))
