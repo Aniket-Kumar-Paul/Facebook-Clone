@@ -9,9 +9,14 @@ function Post({ name, message, email, timestamp, image, postImage }) {
                     <img className='rounded-full' src={image} width={40} height={40} alt="" />
                     <div>
                         <p className='font-medium'>{name}</p>
-                        <p className='text-xs text-gray-400'>
-                            {new Date(timestamp?.toDate()).toLocaleString()}
-                        </p>
+
+                        {timestamp ?
+                            <p className='text-xs text-gray-400'>
+                                {new Date(timestamp?.toDate()).toLocaleString()}
+                            </p>
+                            :
+                            <p className='text-xs text-gray-400'>Loading</p>
+                        }
                     </div>
                 </div>
 
@@ -29,7 +34,7 @@ function Post({ name, message, email, timestamp, image, postImage }) {
                     <ThumbUpIcon className='h-4' />
                     <p className='text-xs sm:text-base'>Like</p>
                 </div>
-                
+
                 <div className='inputIcon rounded-none'>
                     <ChatAltIcon className='h-4' />
                     <p className='text-xs sm:text-base'>Comment</p>
